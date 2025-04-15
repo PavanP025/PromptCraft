@@ -6,21 +6,17 @@ import os
 app = Flask(__name__)
 
 # Initialize OpenAI (will need API key in environment variables)
-PROMPT_TEMPLATE = """
-Create a clear and effective prompt template for the following scenario. Consider these simple questions:
-
-1. What are you trying to achieve? 
-2. Who is this for? (e.g., students, professionals, general users)
-3. Would you prefer the response to be:
-   - A step-by-step guide
-   - A creative response
-   - A detailed analysis
-   - A simple answer
+PROMPT_TEMPLATE = """You are an expert prompt engineer. Create a clear, focused prompt for the following scenario that will get the best possible response from an AI system.
 
 Scenario: {scenario}
 
-Return only the prompt template, formatted clearly and ready to use.
-"""
+Format your response as a single, well-structured prompt that:
+1. Uses clear, precise language
+2. Includes necessary context
+3. Specifies the desired output format
+4. Avoids ambiguity
+
+Return only the prompt template, with no additional explanation or commentary."""
 
 @app.route('/')
 def home():
