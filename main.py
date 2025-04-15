@@ -28,7 +28,7 @@ def generate_prompt():
     
     try:
         genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel(model_name='gemini-1.0-pro')
         response = model.generate_content(PROMPT_TEMPLATE.format(scenario=scenario))
         
         return jsonify({
