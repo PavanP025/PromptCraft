@@ -6,9 +6,16 @@ import os
 app = Flask(__name__)
 
 # Initialize OpenAI (will need API key in environment variables)
-PROMPT_TEMPLATE = """For this scenario: {scenario}
+PROMPT_TEMPLATE = """Create a prompt template for chatting with AI models based on this scenario: {scenario}
 
-Create a reusable prompt template that a user can fill in with their specific details. Return ONLY the template structure with placeholders in [brackets], nothing else."""
+Consider what information and structure would make the AI response most effective. Provide a template that users can copy, fill in the [bracketed sections], and paste into their AI chat conversations.
+
+Remember to:
+- Keep the template clear and focused
+- Include placeholders for key details
+- Structure it for optimal AI response
+
+Return only the template itself, no explanations."""
 
 @app.route('/')
 def home():
