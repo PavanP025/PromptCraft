@@ -1,11 +1,11 @@
 
 from flask import Flask, render_template, request, jsonify
-import google.generativeai as genai
+import openai
 import os
 
 app = Flask(__name__)
 
-# Initialize Gemini (will need API key in environment variables)
+# Initialize OpenAI (will need API key in environment variables)
 PROMPT_TEMPLATE = """
 Given this scenario, create a well-structured prompt following these principles:
 1. Be specific and clear
@@ -27,13 +27,18 @@ def generate_prompt():
     scenario = request.json.get('scenario', '')
     
     try:
-        genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
-        model = genai.GenerativeModel(model_name='gemini-pro')
-        response = model.generate_content(PROMPT_TEMPLATE.format(scenario=scenario))
+        openai.api_key = os.getenv('OPENAI_API_KEY')
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful prompt engineering assistant."},
+                {"role": "user", "content": PROMPT_TEMPLATE.format(scenario=scenario)}
+            ]
+        )
         
         return jsonify({
             'success': True,
-            'result': response.text
+            'result': response.choices[0].message.content
         })
     except Exception as e:
         return jsonify({
