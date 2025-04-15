@@ -7,15 +7,11 @@ app = Flask(__name__)
 
 # Initialize OpenAI (will need API key in environment variables)
 PROMPT_TEMPLATE = """
-Given this scenario, create a well-structured prompt following these principles:
-1. Be specific and clear
-2. Include context and constraints
-3. Break down complex requests
-4. Specify desired output format
+Create a clear and effective prompt template for the following scenario, focusing on the most suitable prompt engineering techniques:
 
 Scenario: {scenario}
 
-Provide the improved prompt and a brief explanation of the improvements made.
+Return only the prompt template, formatted clearly and ready to use. The prompt should employ relevant techniques like chain-of-thought, role-playing, or step-by-step guidance as appropriate for the scenario.
 """
 
 @app.route('/')
