@@ -17,3 +17,15 @@ deploymentTarget = "cloudrun"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[workflows]
+runButton = "Dev Mode"
+
+[[workflows.workflow]]
+name = "Dev Mode"
+author = 41531665
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "FLASK_DEBUG=1 python main.py"
