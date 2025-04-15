@@ -118,8 +118,19 @@
         }
 
         async function generatePrompt() {
-            const scenario = document.getElementById('scenario').value;
+            let scenario;
+            const mode = document.querySelector('input[name="mode"]:checked').value;
             const resultDiv = document.getElementById('result');
+            
+            if (mode === 'simple') {
+                scenario = document.getElementById('scenario').value;
+            } else {
+                const task = document.getElementById('task').value;
+                const expertise = document.getElementById('expertise').value;
+                const goal = document.getElementById('goal').value;
+                const responseType = document.getElementById('responseType').value;
+                scenario = `Task: ${task}\nExpertise Level: ${expertise}\nGoal: ${goal}\nResponse Type: ${responseType}`;
+            }
             
             try {
                 const response = await fetch('/generate_prompt', {
