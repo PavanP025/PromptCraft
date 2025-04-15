@@ -15,11 +15,30 @@
             padding: 20px;
             border-radius: 8px;
         }
+        .questions {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 4px;
+        }
+        .question-input {
+            width: 100%;
+            height: 60px;
+            margin: 5px 0 15px;
+            padding: 10px;
+        }
         textarea {
             width: 100%;
             height: 150px;
             margin: 10px 0;
             padding: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
         button {
             background: #007bff;
@@ -38,8 +57,37 @@
 <body>
     <div class="container">
         <h1>AI Prompt Generator</h1>
-        <p>Enter your scenario and get an optimized prompt:</p>
-        <textarea id="scenario" placeholder="Describe your scenario here..."></textarea>
+        <div class="questions">
+            <h3>Please answer these questions first:</h3>
+            <p>1. What specific task or problem are you trying to solve?</p>
+            <textarea class="question-input" id="task" placeholder="e.g., Writing a blog post, Analyzing data, Creating a marketing plan..."></textarea>
+            
+            <p>2. What level of expertise does your target audience have with this topic?</p>
+            <select id="expertise">
+                <option value="beginner">Beginner - New to the topic</option>
+                <option value="intermediate">Intermediate - Some knowledge</option>
+                <option value="expert">Expert - Deep understanding</option>
+            </select>
+            
+            <p>3. What's the primary goal of this interaction?</p>
+            <select id="goal">
+                <option value="learn">Learning/Understanding</option>
+                <option value="solve">Problem Solving</option>
+                <option value="create">Content Creation</option>
+                <option value="analyze">Analysis/Evaluation</option>
+            </select>
+            
+            <p>4. What type of response would be most helpful?</p>
+            <select id="responseType">
+                <option value="step">Step-by-step guide</option>
+                <option value="creative">Creative response</option>
+                <option value="analysis">Detailed analysis</option>
+                <option value="simple">Simple answer</option>
+            </select>
+        </div>
+        
+        <h3>Now, describe your specific scenario:</h3>
+        <textarea id="scenario" placeholder="Provide additional context or specific requirements..."></textarea>
         <button onclick="generatePrompt()">Generate Prompt</button>
         <div id="result"></div>
     </div>
