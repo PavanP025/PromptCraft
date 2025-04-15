@@ -6,20 +6,19 @@ import os
 app = Flask(__name__)
 
 # Initialize OpenAI (will need API key in environment variables)
-PROMPT_TEMPLATE = """You are an expert prompt engineer. Your task is to generate a highly specific and structured prompt for the given scenario.
+PROMPT_TEMPLATE = """Based on the following scenario, create a prompt template that follows a clear structure.
 
 Scenario: {scenario}
 
-Transform this scenario into a well-crafted prompt that:
-1. Clearly states the specific task or challenge
-2. Defines the expected format and structure
-3. Includes relevant constraints or requirements
-4. Specifies the depth or scope of the response
+Return the response in this format:
 
-Example format:
-"Generate [specific number] of [type of content] that [specific action/goal] using [technique/approach]. Each [output unit] must [specific requirement] related to [topic/theme]."
+Prompt Template:
+1. [Primary question or task]
+2. [Specific requirements or constraints]
+3. [Format or structure expectations]
+4. [Any additional parameters or specifications]
 
-Return only the transformed prompt, formatted as a single paragraph without any additional explanation."""
+Do not fill in the actual content - keep the template structure with placeholders in brackets []."""
 
 @app.route('/')
 def home():
