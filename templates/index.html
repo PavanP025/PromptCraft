@@ -40,6 +40,14 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+        .mode-toggle {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .mode-toggle label {
+            margin: 0 10px;
+            cursor: pointer;
+        }
         button {
             background: #007bff;
             color: white;
@@ -57,7 +65,15 @@
 <body>
     <div class="container">
         <h1>AI Prompt Generator</h1>
-        <div class="questions">
+        <div class="mode-toggle">
+            <label>
+                <input type="radio" name="mode" value="simple" checked onclick="toggleMode('simple')"> Simple Mode
+            </label>
+            <label>
+                <input type="radio" name="mode" value="detailed" onclick="toggleMode('detailed')"> Detailed Mode
+            </label>
+        </div>
+        <div id="detailed-mode" class="questions" style="display: none;">
             <h3>Please answer these questions first:</h3>
             <p>1. What specific task or problem are you trying to solve?</p>
             <textarea class="question-input" id="task" placeholder="e.g., Writing a blog post, Analyzing data, Creating a marketing plan..."></textarea>
@@ -86,13 +102,21 @@
             </select>
         </div>
         
-        <h3>Now, describe your specific scenario:</h3>
-        <textarea id="scenario" placeholder="Provide additional context or specific requirements..."></textarea>
+        </div>
+        <div id="simple-mode">
+            <h3>Describe your scenario:</h3>
+            <textarea id="scenario" placeholder="Describe what you want to achieve..."></textarea>
+        </div>
         <button onclick="generatePrompt()">Generate Prompt</button>
         <div id="result"></div>
     </div>
 
     <script>
+        function toggleMode(mode) {
+            document.getElementById('detailed-mode').style.display = mode === 'detailed' ? 'block' : 'none';
+            document.getElementById('simple-mode').style.display = mode === 'simple' ? 'block' : 'none';
+        }
+
         async function generatePrompt() {
             const scenario = document.getElementById('scenario').value;
             const resultDiv = document.getElementById('result');
