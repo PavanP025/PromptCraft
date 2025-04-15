@@ -27,8 +27,8 @@ def generate_prompt():
     scenario = request.json.get('scenario', '')
     
     try:
-        openai.api_key = os.getenv('OPENAI_API_KEY')
-        response = openai.chat.completions.create(
+        client = openai.OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful prompt engineering assistant."},
