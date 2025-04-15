@@ -106,12 +106,43 @@
         <div id="simple-mode">
             <h3>Describe your scenario:</h3>
             <textarea id="scenario" placeholder="Describe what you want to achieve..."></textarea>
+            <div style="margin: 10px 0;">
+                <label>Reference Image (optional):</label><br>
+                <input type="file" id="imageUpload" accept="image/*" onchange="uploadImage()" style="margin: 5px 0;">
+                <div id="imagePreview" style="margin-top: 10px;"></div>
+            </div>
         </div>
         <button onclick="generatePrompt()">Generate Prompt</button>
         <div id="result"></div>
     </div>
 
     <script>
+        async function uploadImage() {
+            const fileInput = document.getElementById('imageUpload');
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch('/upload_image', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.innerHTML = `<img src="${data.image_url}" style="max-width: 300px; margin-top: 10px;">`;
+                } else {
+                    alert('Error uploading image: ' + data.error);
+                }
+            } catch (error) {
+                alert('Error uploading image: ' + error.message);
+            }
+        }
+
         function toggleMode(mode) {
             document.getElementById('detailed-mode').style.display = mode === 'detailed' ? 'block' : 'none';
             document.getElementById('simple-mode').style.display = mode === 'simple' ? 'block' : 'none';
