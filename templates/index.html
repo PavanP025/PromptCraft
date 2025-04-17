@@ -3,14 +3,30 @@
 <head>
     <title>Prompt Generator</title>
     <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --container-bg: #f5f5f5;
+            --question-bg: #fff;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --container-bg: #2d2d2d;
+            --question-bg: #3d3d3d;
+        }
+        
         body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
         .container {
-            background: #f5f5f5;
+            background: var(--container-bg);
             padding: 20px;
             border-radius: 8px;
         }
@@ -63,7 +79,12 @@
 </head>
 <body>
     <div class="container">
-        <h1 style="color: blue;">AI Prompt Generator</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="color: blue;">AI Prompt Generator</h1>
+            <button onclick="toggleTheme()" style="padding: 8px; border-radius: 4px;">
+                Toggle Theme
+            </button>
+        </div>
         <div class="mode-toggle">
             <label>
                 <input type="radio" name="mode" value="simple" checked onclick="toggleMode('simple')"> Simple Mode
@@ -111,6 +132,16 @@
     </div>
 
     <script>
+        function toggleTheme() {
+            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        // Set initial theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
         function toggleMode(mode) {
             document.getElementById('detailed-mode').style.display = mode === 'detailed' ? 'block' : 'none';
             document.getElementById('simple-mode').style.display = mode === 'simple' ? 'block' : 'none';
