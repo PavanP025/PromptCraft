@@ -143,7 +143,7 @@
                 
                 const data = await response.json();
                 if (data.success) {
-                    resultDiv.innerHTML = data.result;
+                    resultDiv.innerHTML = '<h3>Prompt Template:</h3>' + data.result;
                 } else {
                     resultDiv.innerHTML = `Error: ${data.error}`;
                 }
