@@ -6,3 +6,7 @@ chromadb
 langchain
 pypdf
 sentence-transformers
+chromadb
+langchain
+pypdf
+sentence-transformers
