@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prompt Generator</title>
+    <title>AI Prompt Generator</title>
     <style>
         :root {
             --bg-color: #ffffff;
             --text-color: #000000;
             --container-bg: #f5f5f5;
             --question-bg: #fff;
+            --section-border: #ddd;
         }
         
         [data-theme="dark"] {
@@ -15,54 +17,65 @@
             --text-color: #ffffff;
             --container-bg: #2d2d2d;
             --question-bg: #3d3d3d;
+            --section-border: #444;
         }
         
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
+            margin: 0;
             padding: 20px;
         }
+
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
             background: var(--container-bg);
             padding: 20px;
             border-radius: 8px;
         }
-        .questions {
-            margin-bottom: 20px;
-            padding: 15px;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .sections-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section {
             background: var(--question-bg);
-            border-radius: 4px;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--section-border);
         }
-        .question-input {
-            width: 100%;
-            height: 60px;
-            margin: 5px 0 15px;
+
+        .section h2 {
+            margin-top: 0;
+            color: #007bff;
+            border-bottom: 2px solid var(--section-border);
+            padding-bottom: 10px;
+        }
+
+        .sector-item, .ai-tool-item {
             padding: 10px;
-        }
-        textarea {
-            width: 100%;
-            height: 150px;
-            margin: 10px 0;
-            padding: 10px;
-        }
-        select {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0 15px;
-            border: 1px solid #ddd;
+            margin: 5px 0;
             border-radius: 4px;
-        }
-        .mode-toggle {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .mode-toggle label {
-            margin: 0 10px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
+
+        .sector-item:hover, .ai-tool-item:hover {
+            background-color: var(--container-bg);
+        }
+
         button {
             background: #007bff;
             color: white;
@@ -71,114 +84,115 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        #result {
+
+        #promptForm {
+            display: none;
+            background: var(--question-bg);
+            padding: 20px;
+            border-radius: 8px;
             margin-top: 20px;
-            white-space: pre-wrap;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="header">
             <h1 style="color: blue;">AI Prompt Generator</h1>
-            <button onclick="toggleTheme()" style="padding: 8px; border-radius: 4px;">
-                Toggle Theme
-            </button>
-        </div>
-        <div class="mode-toggle">
-            <label>
-                <input type="radio" name="mode" value="simple" checked onclick="toggleMode('simple')"> Simple Mode
-            </label>
-            <label>
-                <input type="radio" name="mode" value="detailed" onclick="toggleMode('detailed')"> Detailed Mode
-            </label>
-        </div>
-        <div id="detailed-mode" class="questions" style="display: none;">
-            <h3>Please answer these questions first:</h3>
-            <p>1. What specific task or problem are you trying to solve?</p>
-            <textarea class="question-input" id="task" placeholder="e.g., Writing a blog post, Analyzing data, Creating a marketing plan..."></textarea>
-
-            <p>2. What level of expertise does your target audience have with this topic?</p>
-            <select id="expertise">
-                <option value="beginner">Beginner - New to the topic</option>
-                <option value="intermediate">Intermediate - Some knowledge</option>
-                <option value="expert">Expert - Deep understanding</option>
-            </select>
-
-            <p>3. What's the primary goal of this interaction?</p>
-            <select id="goal">
-                <option value="learn">Learning/Understanding</option>
-                <option value="solve">Problem Solving</option>
-                <option value="create">Content Creation</option>
-                <option value="analyze">Analysis/Evaluation</option>
-            </select>
-
-            <p>4. What type of response would be most helpful?</p>
-            <select id="responseType">
-                <option value="step">Step-by-step guide</option>
-                <option value="creative">Creative response</option>
-                <option value="analysis">Detailed analysis</option>
-                <option value="simple">Simple answer</option>
-            </select>
+            <button onclick="toggleTheme()">Toggle Theme</button>
         </div>
 
+        <div class="sections-container">
+            <div class="section">
+                <h2>Sectors 🎯</h2>
+                <div class="sector-item" onclick="selectSector('filmmaking')">🎬 Filmmaking</div>
+                <div class="sector-item" onclick="selectSector('it')">💻 IT & Software Development</div>
+                <div class="sector-item" onclick="selectSector('social')">📱 Social Media & Marketing</div>
+                <div class="sector-item" onclick="selectSector('art')">🎨 Digital Art & Illustration</div>
+                <div class="sector-item" onclick="selectSector('ecommerce')">🛍️ E-commerce & Branding</div>
+                <div class="sector-item" onclick="selectSector('education')">🧑‍🏫 Education & Learning</div>
+                <div class="sector-item" onclick="selectSector('writing')">✍️ Writing & Content Creation</div>
+            </div>
+
+            <div class="section">
+                <h2>AI Tools 🤖</h2>
+                <div class="ai-tool-item" onclick="selectAITool('gpt')">🤖 GPT (ChatGPT, Claude, Gemini)</div>
+                <div class="ai-tool-item" onclick="selectAITool('image')">🎨 DALL·E / Midjourney / Stable Diffusion</div>
+                <div class="ai-tool-item" onclick="selectAITool('video')">🎥 Runway / Pika / Kaiber</div>
+                <div class="ai-tool-item" onclick="selectAITool('audio')">🔊 ElevenLabs / PlayHT</div>
+                <div class="ai-tool-item" onclick="selectAITool('dev')">👨‍💻 GitHub Copilot / Replit AI</div>
+            </div>
         </div>
-        <div id="simple-mode">
-            <h3>Describe your scenario:</h3>
+
+        <div id="promptForm">
+            <h3>Generate Prompt</h3>
             <textarea id="scenario" placeholder="Describe what you want to achieve..."></textarea>
+            <button onclick="generatePrompt()">Generate Prompt</button>
         </div>
-        <button onclick="generatePrompt()">Generate Prompt</button>
+
         <div id="result"></div>
     </div>
 
     <script>
+        let selectedSector = '';
+        let selectedAITool = '';
+
         function toggleTheme() {
             const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
         }
 
-        // Set initial theme
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
 
-        function toggleMode(mode) {
-            document.getElementById('detailed-mode').style.display = mode === 'detailed' ? 'block' : 'none';
-            document.getElementById('simple-mode').style.display = mode === 'simple' ? 'block' : 'none';
+        function selectSector(sector) {
+            selectedSector = sector;
+            document.getElementById('promptForm').style.display = 'block';
+            highlightSelection('sector-item', sector);
+        }
+
+        function selectAITool(tool) {
+            selectedAITool = tool;
+            document.getElementById('promptForm').style.display = 'block';
+            highlightSelection('ai-tool-item', tool);
+        }
+
+        function highlightSelection(className, selected) {
+            document.querySelectorAll('.' + className).forEach(item => {
+                item.style.backgroundColor = '';
+            });
+            event.currentTarget.style.backgroundColor = 'var(--container-bg)';
         }
 
         async function generatePrompt() {
-            let scenario;
-            const mode = document.querySelector('input[name="mode"]:checked').value;
-            const resultDiv = document.getElementById('result');
-
-            if (mode === 'simple') {
-                scenario = document.getElementById('scenario').value;
-            } else {
-                const task = document.getElementById('task').value;
-                const expertise = document.getElementById('expertise').value;
-                const goal = document.getElementById('goal').value;
-                const responseType = document.getElementById('responseType').value;
-                scenario = `Task: ${task}\nExpertise Level: ${expertise}\nGoal: ${goal}\nResponse Type: ${responseType}`;
-            }
-
+            const scenario = document.getElementById('scenario').value;
+            const context = `Sector: ${selectedSector}\nAI Tool: ${selectedAITool}\nScenario: ${scenario}`;
+            
             try {
                 const response = await fetch('/generate_prompt', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ scenario })
+                    body: JSON.stringify({ scenario: context })
                 });
 
                 const data = await response.json();
                 if (data.success) {
-                    resultDiv.innerHTML = '<h3>Prompt Template:</h3>' + data.result;
+                    document.getElementById('result').innerHTML = '<h3>Prompt Template:</h3>' + data.result;
                 } else {
-                    resultDiv.innerHTML = `Error: ${data.error}`;
+                    document.getElementById('result').innerHTML = `Error: ${data.error}`;
                 }
             } catch (error) {
-                resultDiv.innerHTML = `Error: ${error.message}`;
+                document.getElementById('result').innerHTML = `Error: ${error.message}`;
             }
         }
     </script>
