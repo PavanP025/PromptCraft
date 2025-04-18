@@ -21,6 +21,14 @@ Return only the template itself, no explanations."""
 def home():
     return render_template('index.html')
 
+@app.route('/sectors')
+def sectors():
+    return render_template('sectors.html')
+
+@app.route('/ai-tools')
+def ai_tools():
+    return render_template('ai_tools.html')
+
 @app.route('/generate_prompt', methods=['POST'])
 def generate_prompt():
     scenario = request.json.get('scenario', '')

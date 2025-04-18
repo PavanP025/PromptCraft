@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Tools - AI Prompt Generator</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --container-bg: #f5f5f5;
+            --question-bg: #fff;
+            --section-border: #ddd;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --container-bg: #2d2d2d;
+            --question-bg: #3d3d3d;
+            --section-border: #444;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .nav {
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background: var(--question-bg);
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">Home</a>
+            <a href="/sectors">Sectors</a>
+            <a href="/ai-tools">AI Tools</a>
+            <button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+        </div>
+
+        <h1 style="color: blue;">AI Tools</h1>
+        
+        <div class="tool-grid">
+            <div class="tool-card" onclick="location.href='/?tool=gpt'">
+                <h2>🤖 GPT Models</h2>
+                <p>ChatGPT, Claude, Gemini - Large Language Models</p>
+            </div>
+            <div class="tool-card" onclick="location.href='/?tool=image'">
+                <h2>🎨 Image Generation</h2>
+                <p>DALL·E, Midjourney, Stable Diffusion</p>
+            </div>
+            <div class="tool-card" onclick="location.href='/?tool=video'">
+                <h2>🎥 Video Generation</h2>
+                <p>Runway, Pika, Kaiber</p>
+            </div>
+            <div class="tool-card" onclick="location.href='/?tool=audio'">
+                <h2>🔊 Audio Generation</h2>
+                <p>ElevenLabs, PlayHT</p>
+            </div>
+            <div class="tool-card" onclick="location.href='/?tool=dev'">
+                <h2>👨‍💻 Development Tools</h2>
+                <p>GitHub Copilot, Replit AI</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

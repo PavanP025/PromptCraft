@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sectors - AI Prompt Generator</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --container-bg: #f5f5f5;
+            --question-bg: #fff;
+            --section-border: #ddd;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --container-bg: #2d2d2d;
+            --question-bg: #3d3d3d;
+            --section-border: #444;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .nav {
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .sector-card {
+            background: var(--question-bg);
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-5px);
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">Home</a>
+            <a href="/sectors">Sectors</a>
+            <a href="/ai-tools">AI Tools</a>
+            <button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
+        </div>
+
+        <h1 style="color: blue;">Industry Sectors</h1>
+        
+        <div class="sector-grid">
+            <div class="sector-card" onclick="location.href='/?sector=filmmaking'">
+                <h2>🎬 Filmmaking</h2>
+                <p>Generate prompts for video production, editing, and storytelling</p>
+            </div>
+            <div class="sector-card" onclick="location.href='/?sector=it'">
+                <h2>💻 IT & Software Development</h2>
+                <p>Create prompts for coding, debugging, and technical documentation</p>
+            </div>
+            <div class="sector-card" onclick="location.href='/?sector=social'">
+                <h2>📱 Social Media & Marketing</h2>
+                <p>Design prompts for content strategy and engagement</p>
+            </div>
+            <div class="sector-card" onclick="location.href='/?sector=art'">
+                <h2>🎨 Digital Art & Illustration</h2>
+                <p>Generate creative prompts for digital artwork</p>
+            </div>
+            <div class="sector-card" onclick="location.href='/?sector=ecommerce'">
+                <h2>🛍️ E-commerce & Branding</h2>
+                <p>Create prompts for product descriptions and brand messaging</p>
+            </div>
+            <div class="sector-card" onclick="location.href='/?sector=education'">
+                <h2>🧑‍🏫 Education & Learning</h2>
+                <p>Design prompts for educational content and lessons</p>
+            </div>
+            <div class="sector-card" onclick="location.href='/?sector=writing'">
+                <h2>✍️ Writing & Content Creation</h2>
+                <p>Generate prompts for various writing formats</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>
