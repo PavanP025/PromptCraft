@@ -105,9 +105,9 @@
 <body>
     <div class="container">
         <div class="nav">
-            <a href="/">Home</a>
-            <a href="/sectors">Sectors</a>
-            <a href="/ai-tools">AI Tools</a>
+            <a href="/" style="color: #007bff; text-decoration: none; margin-right: 20px;">Home</a>
+            <a href="/sectors" style="color: #007bff; text-decoration: none; margin-right: 20px;">Sectors</a>
+            <a href="/ai-tools" style="color: #007bff; text-decoration: none; margin-right: 20px;">AI Tools</a>
             <button onclick="toggleTheme()" style="float: right;">Toggle Theme</button>
         </div>
         <div class="header">
@@ -129,29 +129,37 @@
         </div>
 
         <div id="detailed-mode" style="display: none;">
-            <div class="questions">
-                <p>What is your specific task?</p>
-                <input type="text" id="task" class="question-input">
+            <div class="questions" style="background: var(--question-bg); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <p style="font-weight: bold; margin-bottom: 8px;">What is your specific task?</p>
+                    <input type="text" id="task" class="question-input" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--section-border); background: var(--bg-color); color: var(--text-color);">
+                </div>
                 
-                <p>Who is your target audience?</p>
-                <select id="audience" class="question-input">
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="expert">Expert</option>
-                </select>
+                <div style="margin-bottom: 15px;">
+                    <p style="font-weight: bold; margin-bottom: 8px;">Who is your target audience?</p>
+                    <select id="audience" class="question-input" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--section-border); background: var(--bg-color); color: var(--text-color);">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
                 
-                <p>What is your goal?</p>
-                <input type="text" id="goal" class="question-input">
+                <div style="margin-bottom: 15px;">
+                    <p style="font-weight: bold; margin-bottom: 8px;">What is your goal?</p>
+                    <input type="text" id="goal" class="question-input" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--section-border); background: var(--bg-color); color: var(--text-color);">
+                </div>
                 
-                <p>What type of response do you prefer?</p>
-                <select id="response-type" class="question-input">
-                    <option value="detailed">Detailed</option>
-                    <option value="concise">Concise</option>
-                    <option value="creative">Creative</option>
-                    <option value="technical">Technical</option>
-                </select>
+                <div style="margin-bottom: 15px;">
+                    <p style="font-weight: bold; margin-bottom: 8px;">What type of response do you prefer?</p>
+                    <select id="response-type" class="question-input" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--section-border); background: var(--bg-color); color: var(--text-color);">
+                        <option value="detailed">Detailed</option>
+                        <option value="concise">Concise</option>
+                        <option value="creative">Creative</option>
+                        <option value="technical">Technical</option>
+                    </select>
+                </div>
             </div>
-            <button onclick="generatePrompt('detailed')">Generate Prompt</button>
+            <button onclick="generatePrompt('detailed')" style="width: 100%; padding: 10px; font-size: 16px;">Generate Prompt</button>
         </div>
 
         <div id="promptForm" style="display: none;">
