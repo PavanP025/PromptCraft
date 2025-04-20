@@ -187,15 +187,25 @@
                 
                 <div class="question-block">
                     <p>3. What's the primary goal of this interaction?</p>
-                    <select id="response-type" class="question-input">
+                    <select id="goal" class="question-input">
                         <option value="learning">Learning/Understanding</option>
                         <option value="problem-solving">Problem Solving</option>
                         <option value="creative">Creative Generation</option>
                         <option value="analysis">Analysis/Evaluation</option>
                     </select>
                 </div>
+
+                <div class="question-block">
+                    <p>4. What type of response would be most helpful?</p>
+                    <select id="response-type" class="question-input">
+                        <option value="step-by-step">Step-by-step instructions</option>
+                        <option value="conceptual">Conceptual explanation</option>
+                        <option value="examples">Examples and analogies</option>
+                        <option value="technical">Technical details</option>
+                    </select>
+                </div>
             </div>
-            <button onclick="generatePrompt('detailed')" class="generate-btn">Generate Prompt</button>
+            <button onclick="generatePrompt('detailed')">Generate Prompt</button>
         </div>
 
         <div id="promptForm" style="display: none;">
