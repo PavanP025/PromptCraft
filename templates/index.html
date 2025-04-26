@@ -28,6 +28,22 @@
             padding: 20px;
         }
 
+        /* Sector-specific themes */
+        body[data-sector="filmmaking"] { background: linear-gradient(135deg, #2c3e50, #34495e); }
+        body[data-sector="it"] { background: linear-gradient(135deg, #2980b9, #3498db); }
+        body[data-sector="social"] { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        body[data-sector="art"] { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
+        body[data-sector="ecommerce"] { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        body[data-sector="education"] { background: linear-gradient(135deg, #f39c12, #f1c40f); }
+        body[data-sector="writing"] { background: linear-gradient(135deg, #16a085, #1abc9c); }
+
+        /* AI Tool-specific themes */
+        body[data-tool="gpt"] { background: linear-gradient(135deg, #6b7280, #4b5563); }
+        body[data-tool="image"] { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+        body[data-tool="video"] { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        body[data-tool="audio"] { background: linear-gradient(135deg, #059669, #047857); }
+        body[data-tool="dev"] { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -142,7 +158,23 @@
     </style>
 </head>
 <body>
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sector = urlParams.get('sector');
+            const tool = urlParams.get('tool');
+            
+            if (sector) {
+                document.body.setAttribute('data-sector', sector);
+                document.getElementById('context-header').textContent = sector.charAt(0).toUpperCase() + sector.slice(1) + ' Sector';
+            } else if (tool) {
+                document.body.setAttribute('data-tool', tool);
+                document.getElementById('context-header').textContent = tool.charAt(0).toUpperCase() + tool.slice(1) + ' Tools';
+            }
+        }
+    </script>
     <div class="container">
+        <h1 id="context-header" style="color: white; text-align: center; margin-bottom: 30px;">AI Prompt Generator</h1>
         <div class="nav">
             <a href="/" style="color: #007bff; text-decoration: none; margin-right: 20px;">Home</a>
             <a href="/sectors" style="color: #007bff; text-decoration: none; margin-right: 20px;">Sectors</a>
