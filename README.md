@@ -1,77 +1,95 @@
 
-# AI Prompt Generator 🤖
+# PromptCraft - AI Prompt Engineering Assistant 🤖
 
-A web-based tool for generating effective AI prompts using OpenAI's GPT models. This application helps users create well-structured prompts for better AI interactions.
+A sophisticated web application that helps users create effective, context-aware prompts for AI interactions across different sectors and AI tools.
 
-## Features 🌟
+## Core Features 🌟
 
-- **Dual Mode Interface**
-  - Simple Mode: Quick prompt generation with scenario description
-  - Detailed Mode: Comprehensive prompt creation with specific parameters
+- **Multi-Mode Interface**
+  - Simple Mode: Quick prompt generation with direct scenario input
+  - Detailed Mode: Advanced prompt creation with contextual parameters
+  - Sector-Specific Mode: Tailored prompts for different industries
+  - AI Tool-Specific Mode: Specialized prompts for various AI tools
 
-- **Customization Options**
-  - Task specification
-  - Audience expertise level selection
-  - Goal definition
-  - Response type preference
+- **Industry Sectors 🏢**
+  - 🎬 Filmmaking
+  - 💻 IT & Software Development
+  - 📱 Social Media & Marketing
+  - 🎨 Digital Art & Illustration
+  - 🛍️ E-commerce & Branding
+  - 🧑‍🏫 Education & Learning
+  - ✍️ Writing & Content Creation
 
-- **RAG Integration**
-  - Built-in Retrieval Augmented Generation (RAG) system
-  - PDF document processing capabilities
-  - Efficient text chunking and embedding
+- **AI Tools Integration 🛠️**
+  - 🤖 GPT Models
+  - 🎨 Image Generation
+  - 🎥 Video Generation
+  - 🔊 Audio Generation
+  - 👨‍💻 Development Tools
 
-## Tech Stack 💻
+- **Smart Features**
+  - Dynamic question sets based on sector/tool selection
+  - Theme toggling (Light/Dark mode)
+  - Responsive design for all devices
+  - Context-aware prompt generation
+
+## Technical Stack 💻
 
 - **Backend**: Flask (Python)
 - **Frontend**: HTML, JavaScript, CSS
 - **AI Integration**: OpenAI GPT-3.5 Turbo
-- **RAG Components**: 
-  - LangChain
-  - ChromaDB
+- **Document Processing**: 
+  - LangChain for RAG implementation
+  - ChromaDB for vector storage
   - HuggingFace Embeddings
-  - PyPDF
+  - PyPDF for document parsing
 
 ## Getting Started 🚀
 
-1. Clone the repository
-2. Set up your OpenAI API key in the environment variables
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
+1. Set up your environment variables:
    ```
-4. Run the application:
-   ```bash
+   OPENAI_API_KEY=your_api_key_here
+   FLASK_SECRET_KEY=your_secret_key_here
+   ```
+
+2. Run the application:
+   ```
    python main.py
    ```
-   The application will be available at `http://127.0.0.1:5000`
+   The application will be available at `http://0.0.0.0:5000`
 
-## Usage Guide 📖
+## Project Structure 📁
 
-1. **Simple Mode**
-   - Enter your scenario description
-   - Click "Generate Prompt"
-   - Get your customized prompt template
+```
+├── attached_assets/     # PDF resources for different sectors and tools
+├── data/               # Storage for processed data
+├── static/            # Static assets
+├── templates/         # HTML templates
+│   ├── index.html    # Main application interface
+│   ├── sectors.html  # Sector selection page
+│   └── ai_tools.html # AI tools selection page
+├── main.py           # Flask application
+└── rag_builder.py    # RAG system implementation
+```
 
-2. **Detailed Mode**
-   - Specify the task details
-   - Select expertise level
-   - Choose your goal
-   - Pick preferred response type
-   - Generate your specialized prompt
+## Features in Detail 📋
 
-## RAG System Usage 📚
+### Simple Mode
+- Quick prompt generation with minimal input
+- Direct scenario description
+- Instant prompt templates
 
-To use the RAG system:
-1. Place PDF documents in the `attached_assets` directory
-2. Run the RAG builder:
-   ```bash
-   python rag_builder.py
-   ```
-3. The system will process and index your documents for enhanced prompt generation
+### Detailed Mode
+- Comprehensive questionnaire
+- Task specification
+- Audience level selection
+- Goal definition
+- Response type customization
 
-## Contributing 🤝
-
-Feel free to submit issues and enhancement requests!
+### RAG System
+- Processes sector-specific documents
+- Contextual prompt enhancement
+- Dynamic knowledge integration
 
 ## License 📄
 
@@ -81,4 +99,4 @@ Feel free to submit issues and enhancement requests!
 
 - OpenAI for GPT API
 - LangChain community
-- All contributors and users of this tool
+- All contributors
