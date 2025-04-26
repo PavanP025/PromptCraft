@@ -167,9 +167,21 @@
             if (sector) {
                 document.body.setAttribute('data-sector', sector);
                 document.getElementById('context-header').textContent = sector.charAt(0).toUpperCase() + sector.slice(1) + ' Sector';
+                // Show sector-specific questions
+                document.querySelectorAll('.sector-questions, .tool-questions').forEach(el => el.style.display = 'none');
+                const sectorQuestions = document.getElementById('sector-' + sector);
+                if (sectorQuestions) {
+                    sectorQuestions.style.display = 'block';
+                }
             } else if (tool) {
                 document.body.setAttribute('data-tool', tool);
                 document.getElementById('context-header').textContent = tool.charAt(0).toUpperCase() + tool.slice(1) + ' Tools';
+                // Show tool-specific questions
+                document.querySelectorAll('.sector-questions, .tool-questions').forEach(el => el.style.display = 'none');
+                const toolQuestions = document.getElementById('tool-' + tool);
+                if (toolQuestions) {
+                    toolQuestions.style.display = 'block';
+                }
             }
         }
     </script>
@@ -200,41 +212,107 @@
         </div>
 
         <div id="detailed-mode" style="display: none;">
-            <div class="questions">
+            <div id="questions" class="questions">
                 <h3>Please answer these questions first:</h3>
-                
-                <div class="question-block">
-                    <p>1. What specific task or problem are you trying to solve?</p>
-                    <textarea id="task" class="question-input" style="height: 100px;" placeholder="e.g., Writing a blog post, Analyzing data, Creating a marketing plan..."></textarea>
-                </div>
-                
-                <div class="question-block">
-                    <p>2. What level of expertise does your target audience have with this topic?</p>
-                    <select id="audience" class="question-input">
-                        <option value="beginner">Beginner - New to the topic</option>
-                        <option value="intermediate">Intermediate - Some familiarity</option>
-                        <option value="expert">Expert - Deep understanding</option>
-                    </select>
-                </div>
-                
-                <div class="question-block">
-                    <p>3. What's the primary goal of this interaction?</p>
-                    <select id="goal" class="question-input">
-                        <option value="learning">Learning/Understanding</option>
-                        <option value="problem-solving">Problem Solving</option>
-                        <option value="creative">Creative Generation</option>
-                        <option value="analysis">Analysis/Evaluation</option>
-                    </select>
+                <div id="default-questions">
+                    <div class="question-block">
+                        <p>1. What specific task or problem are you trying to solve?</p>
+                        <textarea id="task" class="question-input" style="height: 100px;" placeholder="e.g., Writing a blog post, Analyzing data, Creating a marketing plan..."></textarea>
+                    </div>
+                    
+                    <div class="question-block">
+                        <p>2. What level of expertise does your target audience have with this topic?</p>
+                        <select id="audience" class="question-input">
+                            <option value="beginner">Beginner - New to the topic</option>
+                            <option value="intermediate">Intermediate - Some familiarity</option>
+                            <option value="expert">Expert - Deep understanding</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="question-block">
-                    <p>4. What type of response would be most helpful?</p>
-                    <select id="response-type" class="question-input">
-                        <option value="step-by-step">Step-by-step instructions</option>
-                        <option value="conceptual">Conceptual explanation</option>
-                        <option value="examples">Examples and analogies</option>
-                        <option value="technical">Technical details</option>
-                    </select>
+                <!-- Sector-specific questions -->
+                <div id="sector-filmmaking" class="sector-questions" style="display: none;">
+                    <div class="question-block">
+                        <p>3. What type of video content are you creating?</p>
+                        <select id="video-type" class="question-input">
+                            <option value="short-film">Short Film</option>
+                            <option value="documentary">Documentary</option>
+                            <option value="commercial">Commercial/Ad</option>
+                            <option value="music-video">Music Video</option>
+                        </select>
+                    </div>
+                    <div class="question-block">
+                        <p>4. What stage of production are you in?</p>
+                        <select id="production-stage" class="question-input">
+                            <option value="pre-production">Pre-production</option>
+                            <option value="production">Production</option>
+                            <option value="post-production">Post-production</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="sector-it" class="sector-questions" style="display: none;">
+                    <div class="question-block">
+                        <p>3. What programming paradigm are you working with?</p>
+                        <select id="programming-paradigm" class="question-input">
+                            <option value="web-dev">Web Development</option>
+                            <option value="mobile">Mobile Development</option>
+                            <option value="data-science">Data Science</option>
+                            <option value="devops">DevOps</option>
+                        </select>
+                    </div>
+                    <div class="question-block">
+                        <p>4. What's your development priority?</p>
+                        <select id="dev-priority" class="question-input">
+                            <option value="performance">Performance</option>
+                            <option value="security">Security</option>
+                            <option value="scalability">Scalability</option>
+                            <option value="maintainability">Maintainability</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- AI Tool-specific questions -->
+                <div id="tool-gpt" class="tool-questions" style="display: none;">
+                    <div class="question-block">
+                        <p>3. What's your conversation style preference?</p>
+                        <select id="conversation-style" class="question-input">
+                            <option value="analytical">Analytical</option>
+                            <option value="creative">Creative</option>
+                            <option value="instructional">Instructional</option>
+                            <option value="conversational">Conversational</option>
+                        </select>
+                    </div>
+                    <div class="question-block">
+                        <p>4. What's your desired output format?</p>
+                        <select id="output-format" class="question-input">
+                            <option value="structured">Structured (Lists/Tables)</option>
+                            <option value="narrative">Narrative</option>
+                            <option value="code">Code/Technical</option>
+                            <option value="mixed">Mixed Format</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="tool-image" class="tool-questions" style="display: none;">
+                    <div class="question-block">
+                        <p>3. What's your preferred art style?</p>
+                        <select id="art-style" class="question-input">
+                            <option value="realistic">Realistic</option>
+                            <option value="abstract">Abstract</option>
+                            <option value="digital-art">Digital Art</option>
+                            <option value="photography">Photography-like</option>
+                        </select>
+                    </div>
+                    <div class="question-block">
+                        <p>4. What's the primary use case?</p>
+                        <select id="image-use-case" class="question-input">
+                            <option value="marketing">Marketing</option>
+                            <option value="illustration">Illustration</option>
+                            <option value="concept-art">Concept Art</option>
+                            <option value="personal">Personal Project</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <button onclick="generatePrompt('detailed')">Generate Prompt</button>
