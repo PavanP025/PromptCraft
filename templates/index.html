@@ -166,8 +166,16 @@
             
             if (sector) {
                 document.body.setAttribute('data-sector', sector);
-                document.getElementById('context-header').textContent = sector.charAt(0).toUpperCase() + sector.slice(1) + ' Sector';
-                // Show sector-specific questions
+                const sectorTitles = {
+                    'filmmaking': '🎬 Filmmaking',
+                    'it': '💻 IT & Software Development',
+                    'social': '📱 Social Media & Marketing',
+                    'art': '🎨 Digital Art & Illustration',
+                    'ecommerce': '🛍️ E-commerce & Branding',
+                    'education': '🧑‍🏫 Education & Learning',
+                    'writing': '✍️ Writing & Content Creation'
+                };
+                document.getElementById('context-header').textContent = sectorTitles[sector] || (sector.charAt(0).toUpperCase() + sector.slice(1));
                 document.querySelectorAll('.sector-questions, .tool-questions').forEach(el => el.style.display = 'none');
                 const sectorQuestions = document.getElementById('sector-' + sector);
                 if (sectorQuestions) {
@@ -175,7 +183,14 @@
                 }
             } else if (tool) {
                 document.body.setAttribute('data-tool', tool);
-                document.getElementById('context-header').textContent = tool.charAt(0).toUpperCase() + tool.slice(1) + ' Tools';
+                const toolTitles = {
+                    'gpt': '🤖 GPT Models',
+                    'image': '🎨 Image Generation',
+                    'video': '🎥 Video Generation',
+                    'audio': '🔊 Audio Generation',
+                    'dev': '👨‍💻 Development Tools'
+                };
+                document.getElementById('context-header').textContent = toolTitles[tool] || (tool.charAt(0).toUpperCase() + tool.slice(1));
                 // Show tool-specific questions
                 document.querySelectorAll('.sector-questions, .tool-questions').forEach(el => el.style.display = 'none');
                 const toolQuestions = document.getElementById('tool-' + tool);
